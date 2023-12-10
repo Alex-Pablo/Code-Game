@@ -6,6 +6,10 @@
 
 @import 'assets/styles/normalize.css';
 
+html{
+    color-scheme: dark light;
+}
+
 body{
     background-color: #181919;
     font-family: 'Poppins', sans-serif;

@@ -1,0 +1,35 @@
+.wrapper{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .title{
+        margin: 0 0 10px 0;
+        font-weight: 700;
+        color: white;
+        font-size: 0.87rem;
+    }
+    .wrapper-instruction{
+        position:absolute;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        padding: 5px;
+
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+
+        .instruction{
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #CFD2D2;
+        }
+
+        .track{
+            color: #596369;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    }
+}
