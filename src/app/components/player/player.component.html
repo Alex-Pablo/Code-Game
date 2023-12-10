@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <p class="title">Jugadores</p>
+    <div class="wrapper-players">
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Punteo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let player of players">
+                    <td>{{player.name}}</td>
+                    <td>{{player.score}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

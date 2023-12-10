@@ -1,20 +1,26 @@
 .wrapper{
     width: 100%;
     height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 5fr 35fr;
     position: relative;
     .title{
-        margin: 0 0 10px 0;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
         font-weight: 700;
         color: white;
         font-size: 0.87rem;
+        margin: 0;
     }
     .wrapper-instruction{
-        position:absolute;
-        height: 100%;
-        width: 100%;
+        position: absolute;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
         overflow: auto;
         padding: 5px;
-
+        width: 100%;
+        height: 100%;
         user-select: none;
         -moz-user-select: none;
         -webkit-user-select: none;
@@ -24,6 +30,7 @@
             font-weight: 500;
             font-size: 0.8rem;
             color: #CFD2D2;
+            margin: 0;
         }
 
         .track{

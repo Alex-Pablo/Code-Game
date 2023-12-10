@@ -36,14 +36,16 @@
         grid-column-end: 2;
         grid-row-start: 2;
         grid-row-end: 3;
-        height: 100%;
-        width: 100%;
-        overflow: auto;
+
 
 
         border-radius: 8px;
         background: #1B1C1C;
         box-shadow:  7px 7px 14px #181919,
                      -7px -7px 14px #1e1f1f;
+
+
+        height: 100%;
+        width: 100%;             
     }
 }

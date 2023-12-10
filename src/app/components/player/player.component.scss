@@ -1,0 +1,58 @@
+.wrapper{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 5fr 35fr;
+    position: relative;
+
+
+    .title{
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        font-weight: 700;
+        color: #848BBD;
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    .wrapper-players{
+        position: absolute;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 0 0 10px 0; 
+        }
+
+        //player and title
+        th, td{
+            font-weight: 500;
+            padding: 15px 10px;
+        }
+
+        //the title
+        th {
+            color: #62A6F6;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+
+        //each player
+        td {
+            color: #646566;
+            font-size: 0.85rem;
+            border-bottom: 10px solid #1B1C1C;
+        }
+        tbody tr{
+            background-color: rgba(40, 42, 54, 0.17);
+            margin: 50px 0;
+        }
+    }
+}
