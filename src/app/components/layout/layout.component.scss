@@ -1,0 +1,22 @@
+.wrapper {
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: auto 95vw auto;
+    grid-template-rows: auto 93vh;
+
+    .navbar {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;  
+        grid-row-end: 2;    
+    }
+
+    .content {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;  
+        grid-row-end: 3;    
+    }
+}
