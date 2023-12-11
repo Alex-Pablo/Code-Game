@@ -1,0 +1,21 @@
+<div class="wrapper">
+    <div class="codeEditor">
+
+        <ngx-codemirror #codemirror
+        [options]="codeMirrorOptions"
+        [(ngModel)]="challengeCode"
+        [autoFocus]="true"
+        >
+      </ngx-codemirror>
+
+    </div>
+
+    <div class="btns">
+        <button class="consult">Consultar</button>
+        <button class="send">Enviar</button>        
+    </div>
+
+    <div class="result">
+
+    </div>
+</div>

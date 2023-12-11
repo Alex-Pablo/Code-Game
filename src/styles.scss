@@ -6,6 +6,12 @@
 
 @import 'assets/styles/normalize.css';
 
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/theme/dracula.css';
+@import 'codemirror/addon/fold/foldgutter.css';
+
+
+
 html{
     color-scheme: dark light;
 }
