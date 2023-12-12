@@ -15,7 +15,35 @@
         <button class="send">Enviar</button>        
     </div>
 
-    <div class="result">
+    <div class="wrapper-result" >
+        @if(resultSoluction != null){
+            <p 
+                class="state" 
+                [ngClass]="resultSoluction.state == 'Exito' || resultSoluction.state == 'Resultado' 
+                    ? 'state-success'
+                    :'state-error' "
+                >
+                {{resultSoluction.state}}
+            </p>
 
+            <div class="message-solution">
+                @if (resultSoluction.state == "Exito" || resultSoluction.state == "Resultado") {
+                    <table >
+                        <thead>
+                          <tr>
+                            <th *ngFor="let key of getKeyObj(resultSoluction.message[0])">{{ key }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let row of resultSoluction.message">
+                            <td *ngFor="let key of getKeyObj(row)">{{ row[key] }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                } @else if(resultSoluction.state=="Error"){
+                    <p class="error-solution">{{resultSoluction.message}}</p>
+                }
+            </div>
+        }
     </div>
 </div>
