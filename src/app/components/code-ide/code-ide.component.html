@@ -3,7 +3,7 @@
 
         <ngx-codemirror #codemirror
         [options]="codeMirrorOptions"
-        [(ngModel)]="challengeCode"
+        [(ngModel)]="scriptCodeEditor"
         [autoFocus]="true"
         >
       </ngx-codemirror>
@@ -12,36 +12,36 @@
 
     <div class="btns">
         <button class="consult">Consultar</button>
-        <button class="send">Enviar</button>        
+        <button class="send" (click)="challenge()">Enviar</button>        
     </div>
 
     <div class="wrapper-result" >
-        @if(resultSoluction != null){
+        @if(resultSolution != null){
             <p 
                 class="state" 
-                [ngClass]="resultSoluction.state == 'Exito' || resultSoluction.state == 'Resultado' 
+                [ngClass]="resultSolution.state == 'Exito' || resultSolution.state == 'Resultado' 
                     ? 'state-success'
                     :'state-error' "
                 >
-                {{resultSoluction.state}}
+                {{resultSolution.state}}
             </p>
 
             <div class="message-solution">
-                @if (resultSoluction.state == "Exito" || resultSoluction.state == "Resultado") {
+                @if (resultSolution.state == "Exito" || resultSolution.state == "Resultado") {
                     <table >
                         <thead>
                           <tr>
-                            <th *ngFor="let key of getKeyObj(resultSoluction.message[0])">{{ key }}</th>
+                            <th *ngFor="let key of getKeyObj(resultSolution.message[0])">{{ key }}</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let row of resultSoluction.message">
+                          <tr *ngFor="let row of resultSolution.message">
                             <td *ngFor="let key of getKeyObj(row)">{{ row[key] }}</td>
                           </tr>
                         </tbody>
                       </table>
-                } @else if(resultSoluction.state=="Error"){
-                    <p class="error-solution">{{resultSoluction.message}}</p>
+                } @else if(resultSolution.state=="Error"){
+                    <p class="error-solution">{{resultSolution.message}}</p>
                 }
             </div>
         }

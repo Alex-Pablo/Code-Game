@@ -7,6 +7,7 @@ import 'codemirror/lib/codemirror';
 import 'codemirror/mode/sql/sql';
 import { Result } from '../../models/result';
 import { NgClass, NgFor } from '@angular/common';
+import { ScriptService } from '../../services/script.service';
 
 @Component({
   selector: 'app-code-ide',
@@ -21,9 +22,9 @@ import { NgClass, NgFor } from '@angular/common';
   styleUrl: './code-ide.component.scss'
 })
 export class CodeIDEComponent {
-
-  challengeCode?:string;
-  resultSoluction?: Result;
+  constructor(private scriptService:ScriptService){}
+  scriptCodeEditor:string = "";
+  resultSolution?: Result;
 
   codeMirrorOptions: any = {
     theme: 'dracula',
@@ -39,9 +40,9 @@ export class CodeIDEComponent {
 
 
   ngOnInit(){
-    this.challengeCode ='select * from Clientes';
+    this.scriptCodeEditor ='select * from Clientes';
 
-    this.resultSoluction = {
+    this.resultSolution = {
       state:'Resultado',
       message:[
         {
@@ -84,10 +85,35 @@ export class CodeIDEComponent {
     }
   }
 
-
   getKeyObj(objeto: any): string[] {
     return Object.keys(objeto);
   }
 
+  challenge(){
+    if (this.scriptCodeEditor.trim() == "") {
+      this.resultSolution ={
+        state: "Error",
+        message: "Proporcione una solucion"
+      }
+      return
+    }
+
+
+    const expresionRegular = /^(?!.*\binsert\b)(?!.*\bdelete\b)(?!.*\bupdate\b)[\s\S]*$/i;
+    if ( !expresionRegular.test(this.scriptCodeEditor.toLocaleLowerCase())) {
+      this.resultSolution ={
+        state: "Error",
+        message: "Esta sintaxis no se admite"
+      }
+      return
+    }
+
+    this.scriptService.validateSolution(this.scriptCodeEditor)
+      .subscribe( {
+        next: result => this.resultSolution = {state:"Exito", message:result},
+        error: err => this.resultSolution = {state:"Error",message:err.error}
+      })
+
+  }
 
 }

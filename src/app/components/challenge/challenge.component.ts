@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScriptService } from '../../services/script.service';
 
 @Component({
   selector: 'app-challenge',
@@ -11,9 +12,14 @@ export class ChallengeComponent implements OnInit {
   challenge!: string ;
   challengeTrack!: string;
 
+  constructor(private scriptService:ScriptService){}
 
   ngOnInit(){
-    this.challenge = 'Realice una consulta a la tabla Clientes';
-    this.challengeTrack = 'Clientes';
+    this.scriptService.getChallenge().subscribe()
+    this.scriptService._getValue$()
+      .subscribe((data)=>{
+        this.challenge =data.challenge;
+        this.challengeTrack = data.trackChallenge;
+      })
   }
 }
