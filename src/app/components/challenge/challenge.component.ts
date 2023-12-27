@@ -15,7 +15,7 @@ export class ChallengeComponent implements OnInit {
   constructor(private scriptService:ScriptService){}
 
   ngOnInit(){
-    this.scriptService.getChallenge().subscribe()
+    this.scriptService.getChallenge();
     this.scriptService._getValue$()
       .subscribe((data)=>{
         this.challenge =data.challenge;

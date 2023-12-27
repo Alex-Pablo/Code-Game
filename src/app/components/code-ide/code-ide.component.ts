@@ -40,80 +40,81 @@ export class CodeIDEComponent {
 
 
   ngOnInit(){
-    this.scriptCodeEditor ='select * from Clientes';
-
-    this.resultSolution = {
-      state:'Resultado',
-      message:[
-        {
-          id: '1',
-          nombre: 'Alex'
-        },
-        {
-          id: '2',
-          nombre: 'Alex pablo anibal mendex pablo'
-        },      {
-          id: '1',
-          nombre: 'Alex'
-        },
-        {
-          id: '2',
-          nombre: 'Alex pablo anibal mendex pablo'
-        },      {
-          id: '1',
-          nombre: 'Alex'
-        },
-        {
-          id: '2',
-          nombre: 'Alex pablo anibal mendex pablo'
-        },      {
-          id: '1',
-          nombre: 'Alex'
-        },
-        {
-          id: '2',
-          nombre: 'Alex pablo anibal mendex pablo pablo jjjjjjjjjjjjjjjjjjjjjjjjdddddddddddddddddd'
-        },      {
-          id: '1',
-          nombre: 'Alex'
-        },
-        {
-          id: '2',
-          nombre: 'Alex pablo anibal mendex pablo'
-        },
-      ]
-    }
+    this.scriptCodeEditor ='select * from Clientes \n insert';
   }
 
   getKeyObj(objeto: any): string[] {
     return Object.keys(objeto);
   }
 
-  challenge(){
-    if (this.scriptCodeEditor.trim() == "") {
-      this.resultSolution ={
-        state: "Error",
-        message: "Proporcione una solucion"
-      }
-      return
+  challenge(){    
+    const solutionChallenge = this.scriptCodeEditor
+                                    .split('\n')
+                                    .filter((piece)=> piece.trim())
+                                    .map((piece)=> piece.trim())
+                                    .join(' ')
+    
+    if (this.validEmptySolution(solutionChallenge)) {
+      return;
     }
 
-
-    const expresionRegular = /^(?!.*\binsert\b)(?!.*\bdelete\b)(?!.*\bupdate\b)[\s\S]*$/i;
-    if ( !expresionRegular.test(this.scriptCodeEditor.toLocaleLowerCase())) {
-      this.resultSolution ={
-        state: "Error",
-        message: "Esta sintaxis no se admite"
-      }
-      return
+    if (this.invalidSqlCommand(solutionChallenge)) {
+      return;
     }
-
-    this.scriptService.validateSolution(this.scriptCodeEditor)
+    console.log(solutionChallenge);
+    this.scriptService.validateSolution(solutionChallenge)
       .subscribe( {
-        next: result => this.resultSolution = {state:"Exito", message:result},
+        next: result =>{
+          this.resultSolution = {state:"Exito", message:result}
+        },
         error: err => this.resultSolution = {state:"Error",message:err.error}
       })
+  }
+
+  executeConsult(){
+    const solutionChallenge = this.scriptCodeEditor
+                                    .split('\n')
+                                    .filter((piece)=> piece.trim())
+                                    .map((piece)=> piece.trim())
+                                    .join(' ')
+    if (this.validEmptySolution(solutionChallenge)) {
+      return;
+    }
+
+    if (this.invalidSqlCommand(solutionChallenge)) {
+      return;
+    }
 
   }
+
+
+
+  invalidSqlCommand(code:string):boolean{
+    const expresionRegular = /^(?!.*\binsert\b)(?!.*\bdelete\b)(?!.*\bupdate\b)[\s\S]*$/i;
+
+    if ( !expresionRegular.test(code.toLocaleLowerCase())) {
+      this.resultSolution ={
+        state: "Error",
+        message: "El codigo que escribio no se admite, lea detenidamente el desafio"
+      }
+      console.log(code);
+      return true
+    }
+    return false
+  }
+
+
+  validEmptySolution(code:string):boolean{
+    if (code == "") {
+      this.resultSolution ={
+        state: "Error",
+        message: "No hay codigo que ejecutar"
+      }
+      return true
+    }
+    return false
+  }
+
+
 
 }
