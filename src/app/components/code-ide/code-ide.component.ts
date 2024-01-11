@@ -40,7 +40,7 @@ export class CodeIDEComponent {
 
 
   ngOnInit(){
-    this.scriptCodeEditor ='select * from Clientes \n insert';
+    this.scriptCodeEditor ='select * from Clientes';
   }
 
   getKeyObj(objeto: any): string[] {
@@ -61,7 +61,6 @@ export class CodeIDEComponent {
     if (this.invalidSqlCommand(solutionChallenge)) {
       return;
     }
-    console.log(solutionChallenge);
     this.scriptService.validateSolution(solutionChallenge)
       .subscribe( {
         next: result =>{
@@ -85,6 +84,17 @@ export class CodeIDEComponent {
       return;
     }
 
+    this.scriptService.executeScript(solutionChallenge)
+    .subscribe( {
+      next: result =>{
+        this.resultSolution = {state:"Resultado", message:result}
+      },
+      error: err => {
+        this.resultSolution = {
+        state:"Error",message:err.error
+      }
+    }
+    })
   }
 
 
@@ -97,7 +107,6 @@ export class CodeIDEComponent {
         state: "Error",
         message: "El codigo que escribio no se admite, lea detenidamente el desafio"
       }
-      console.log(code);
       return true
     }
     return false
