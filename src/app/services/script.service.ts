@@ -32,17 +32,18 @@ export class ScriptService {
     .subscribe();
   }
 
-  validateSolution(solucion:string){
-    console.log(solucion);
-    
+  validateSolution(solucion:string){    
     return this.httpClient.post(`${this.URL_API}/Script`,{id:this._challenge$.value.id, soluctionScript: solucion})
     .pipe(
       tap(() => {
         this.orderChallenge++;
         this.getChallenge();
-        console.log(this.orderChallenge);
       })
     );
+  }
+
+  executeScript(solution: string){
+    return  this.httpClient.post(`${this.URL_API}/Script/execute`,{script:solution});
   }
 
   
